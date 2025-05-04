@@ -1,4 +1,4 @@
-resource "aws_instance" "example" {
+resource "aws_instance" "myec2" {
   ami                         = var.ami_id      # copy an ami from the AWS console
   instance_type               = var.instance_type                  # enter instance type
   subnet_id                   = var.subnet_id   #copy subnet id from the AWS console
