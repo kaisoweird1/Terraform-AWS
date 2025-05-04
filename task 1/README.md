@@ -1,6 +1,7 @@
-#  Terraform AWS EC2 Instance Setup
+# Terraform AWS EC2 Instance Setup
 
-This file helps you create an EC2 instance on AWS using Terraform. It starts with hardcoded values and later uses variables for better modularity and reusability.
+This file helps you create an EC2 instance on AWS using Terraform. This file contains variableized values for now, but you can also hardcode the values instead of variabilizing them as well.
+
 ---
 
 ##  Configurations
