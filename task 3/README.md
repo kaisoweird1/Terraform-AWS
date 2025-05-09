@@ -16,7 +16,7 @@ task 3/
 | |---- sg/ 
 | |---- subnet/ 
 | |---- vpc/ 
-|
+| |---- igw/
 |----------- dev/ # Development environment configuration
 | |---- main.tf 
 | |---- variables.tf 
@@ -32,7 +32,7 @@ task 3/
 | |----(same structure as dev/)
 ```
 ## Module Structure
-This is how the structure of every module in the file "module" (ec2, eip, nat....) Looks like: 
+This is how the structure of every module in the file "module" (ec2, eip, nat, etc.) Looks like: 
 ```bash
 | |-------- ec2 (module name)
 | |-- main.tf
