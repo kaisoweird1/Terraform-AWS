@@ -36,16 +36,17 @@ task 3/
 This is how the structure of every module in the file "module" (ec2, eip, nat, etc.) Looks like: 
 ```bash
 | |-------- ec2 (module name)
-| |-- main.tf
-| |-- output.tf
-| |-- variables.tf
+| |-- main.tf      # Defines the actual resources to be created within the module.
+| |-- output.tf    # Declares the input variables required by the module.
+| |-- variables.tf # Defines the output values that the module exports for use by other modules or the root configuration.
 ```
+
 # File Structure
 
 The `dev` environment (and also `prod` and `test`) includes the following seven mandatory Terraform configuration files:
 
 ## 1. `main.tf`
-Declares the actual infrastructure by calling reusable modules (such as VPC, Subnet, EC2, etc.). This file is the blueprint for resource creation and relationships.
+Declares the infrastructure by calling reusable modules (such as VPC, Subnet, EC2, etc.). This file is the blueprint for resource creation and relationships.
 
 ## 2. `variables.tf`
 Declares all input variables that are used throughout the environment's configuration. It offers flexibility and parameterization.
