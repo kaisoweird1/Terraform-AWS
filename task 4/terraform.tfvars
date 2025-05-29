@@ -1,7 +1,7 @@
 
 vpc_cidr="10.0.0.0/16"
 az_count      = 2
-db_pass       = "NewPassForDB102"
+db_pass       = "dbpass" #not the actual pass
 availability_zones = ["us-west-1c", "us-west-1b"]
 key_name      = "newkey"
 instance_type = "t2.micro"
