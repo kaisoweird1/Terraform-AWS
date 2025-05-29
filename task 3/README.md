@@ -7,7 +7,12 @@ This project demonstrates a modular approach to provisioning AWS infrastructure 
 # Root Structure
 ```bash
 task 3/
-|
+|--- main.tf          # Core infrastructure definitions using reusable modules (VPC, EC2, RDS, etc.)
+|--- variables.tf     # Declares input variables used across the root configuration.
+|--- backend.tf       # Configures remote state backend (e.g., S3 bucket with DynamoDB for state locking).
+|--- provider.tf      # Specifies provider settings (e.g., AWS region, credentials).
+|--- output.tf        # Defines the output values from the root module (e.g., ALB DNS, instance IPs).
+|--- local.tf         # Declares local values (e.g., tags, common naming conventions, or computed values).
 |----------- modules/ # Reusable Terraform modules
 | |---- ec2/ 
 | |---- eip/ 
@@ -18,19 +23,11 @@ task 3/
 | |---- vpc/ 
 | |---- igw/
 |----------- dev/ # Development environment configuration
-| |---- main.tf 
-| |---- variables.tf 
-| |---- terraform.tfvars 
-| |---- backend.tf 
-| |---- provider.tf 
-| |---- output.tf
-| |---- local.tf
-|
-|----------- prod/ # Production environment
-| |---- (same structure as dev/)
-|
+| |---- dev.tfvars 
+|----------- staging/ # Production environment
+| |---- staging.tfvars
 |----------- test/ # Testing environment
-| |----(same structure as dev/)
+| |---- test.tfvars
 ```
 # Module Structure
 This is how the structure of every module in the file "module" (ec2, eip, nat, etc.) Looks like: 
@@ -41,28 +38,11 @@ This is how the structure of every module in the file "module" (ec2, eip, nat, e
 | |-- variables.tf # Defines the output values that the module exports for use by other modules or the root configuration.
 ```
 
-# File Structure
+# Env Specific files
 
-The `dev` environment (and also `prod` and `test`) includes the following seven mandatory Terraform configuration files:
+The `dev` environment (and also `staging` and `test`) includes the following Terraform configuration file:
 
-## 1. `main.tf`
-Declares the infrastructure by calling reusable modules (such as VPC, Subnet, EC2, etc.). This file is the blueprint for resource creation and relationships.
 
-## 2. `variables.tf`
-Declares all input variables that are used throughout the environment's configuration. It offers flexibility and parameterization.
-
-## 3. `terraform.tfvars`
+### - `{env_name}.tfvars`
 Assigns literal values to variables declared in `variables.tf`. Each environment (`dev`, `prod`, `test`) will have its own values appropriate for its use.
-
-## 4. `backend.tf`
-Defines the remote backend configuration (e.g., S3 for storing state). Enables shared, consistent, and secure Terraform state management.
-
-## 5. `provider.tf`
-Configures the cloud provider (AWS here), including provider name, region, and version required to have consistent deployments.
-
-## 6. `output.tf`
-Defines and reveals significant output values from the deployment (such as VPC ID, Subnet ID). These outputs may be used by other configurations or for logging purposes.
-
-## 7. `local.tf`
-It holds locally scoped values (such as environment name and app name) utilized to minimize duplication and build dynamic resource names and tags.
 
